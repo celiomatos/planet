@@ -1,9 +1,9 @@
 package com.planet.repository;
 
-import com.planet.domain.Planet;
+import com.planet.domain.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PlanetRepository extends JpaRepository<Planet, Integer> {
+public interface JobRepository extends JpaRepository<Job, String> {
 }
