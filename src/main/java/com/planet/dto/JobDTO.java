@@ -14,8 +14,6 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class JobDTO {
 
-    @NotBlank(message = "Informar o ID do Job é obrigatório")
-    @Size(max = 10, message = "ID do Job deve ter no maximo 10 caracteres")
     private String id;
 
     @NotBlank(message = "Informar o titulo do Job é obrigatório")

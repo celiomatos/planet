@@ -1,16 +1,12 @@
-#Docker network
+# Mongo
 ```
-docker network create planet-net
-```
-# Oracle
-```
-docker run -d -p 1521:1521 --network planet-net --name planet-db oracleinanutshell/oracle-xe-11g   
+docker run --name some-mongo -p 27017:27017 -it -d mongo:3.6.23-xenial   
 ```
 #Build app
 ```
 docker build -f Dockerfile -t celiomatos/planet .
-docker run -d -p 8080:8080 --network planet-net --link planet-db celiomatos/planet
+docker run -d -p 8080:8080 --link some-mongo celiomatos/planet
 ```
 
 # Swagger
-http://127.0.0.1:8080/swagger-ui.html#/
+http://127.0.0.1:8080/swagger-ui/index.html
