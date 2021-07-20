@@ -5,9 +5,11 @@ import com.planet.dto.JobDTO;
 import com.planet.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
 
 @Service
 public class JobService {
@@ -15,18 +17,23 @@ public class JobService {
     @Autowired
     private JobRepository repository;
 
-    public List<JobDTO> findAll() {
-        return repository.findAll().stream().map(this::mToD).collect(Collectors.toList());
+    public Flux<Job> findAll() {
+        return repository.findAll();
     }
 
-    public JobDTO save(JobDTO entity) {
-        return mToD(repository.save(dToM(entity)));
+    @Transactional
+    public Mono<Job> save(JobDTO dto) {
+        return repository.save(dToM(dto));
     }
 
-    public void remove(String id) {
-        repository.deleteById(id);
+    public Mono<Void> remove(String id) {
+        return repository.deleteById(id);
     }
 
+    public Mono<Job> findById(String id) {
+        return repository.findById(id).onErrorMap(error -> new DataFormatException(""));
+
+    }
 
     public Job dToM(JobDTO dto) {
         return Job.builder()
@@ -37,12 +44,4 @@ public class JobService {
                 .build();
     }
 
-    public JobDTO mToD(Job entity) {
-        return JobDTO.builder()
-                .id(entity.getId())
-                .title(entity.getTitle())
-                .minSalary(entity.getMinSalary())
-                .maxSalary(entity.getMaxSalary())
-                .build();
-    }
 }
