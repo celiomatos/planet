@@ -32,7 +32,7 @@ public class ValidateJobDTOCreateSteps extends CucumberSpringConfiguration {
 
     @Then("o lance eh aceito")
     public void the_client_receives_status_code_of_200() {
-        Assert.assertEquals(1, list.size());
+        Assert.assertEquals(2, list.size());
     }
 
 }
