@@ -1,6 +1,6 @@
 package com.planet;
 
-import io.cucumber.datatable.DataTable;
+import com.planet.dto.JobDTO;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -10,7 +10,6 @@ import io.restassured.specification.RequestSpecification;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
@@ -34,15 +33,11 @@ public class RestAssuredExtension {
         }
     }
 
-    public static ResponseOptions<Response> postOps(String path, DataTable dataTable) {
-        var postContent = new HashMap<String, String>();
-        postContent.put("id", "5");
-        postContent.put("title", "Robotium course");
-        postContent.put("author", "ExecuteAutomation");
+    public static ResponseOptions<Response> postOps(String path, JobDTO dto) {
 
         return given().contentType(ContentType.JSON)
                 .with()
-                .body(dataTable)
+                .body(dto)
                 .when()
                 .post(baseUrl + path);
 //                .then().statusCode(200);

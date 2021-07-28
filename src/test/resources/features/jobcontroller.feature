@@ -5,6 +5,6 @@ Feature: Job Controller
 
   Scenario: Criar um Job
     Given Post no endpoint job
-      | id  | name  |
-      | 1   | celio |
+      | title                               | minSalary  | maxSalary |
+      | Desenvolvedor Front-end Junior      | -1         | 10000     |
     Then Obtenho o id do job
