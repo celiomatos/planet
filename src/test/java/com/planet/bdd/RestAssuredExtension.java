@@ -1,4 +1,4 @@
-package com.planet;
+package com.planet.bdd;
 
 import com.planet.dto.JobDTO;
 import io.restassured.RestAssured;
