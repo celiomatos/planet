@@ -1,4 +1,4 @@
-package com.planet.bdd;
+package com.planet;
 
 
 import io.cucumber.junit.Cucumber;
